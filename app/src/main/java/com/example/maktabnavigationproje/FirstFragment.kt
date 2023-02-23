@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.maktabnavigationproje.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment(R.layout.fragment_first) {
-    val viewModel:MainViewModel by viewModels()
+    val viewModel:MainViewModel by activityViewModels()
    private var _binding:FragmentFirstBinding?=null
     private val binding get() = _binding!!
 
@@ -30,8 +31,8 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
             val action=FirstFragmentDirections.actionFirstFragmentToSecondFragment("mohammad")
             Navigation.findNavController(view).navigate(action)
         }
-        val model = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        model.textButton.observe(viewLifecycleOwner){
+        //val model = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        viewModel.textButton.observe(viewLifecycleOwner){
             binding.textView.text=it
         }
     }
